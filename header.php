@@ -80,7 +80,7 @@ include('head.php'); ?>
 								</div>
 
 								<div class="menu-item">
-									<a class="menu-link" href="admin-buildings.php">
+									<a class="menu-link" href="admin-bookings.php">
 										<span class="menu-title">Bookings</span>
 									</a>
 								</div>
