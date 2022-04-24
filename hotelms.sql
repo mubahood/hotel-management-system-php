@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 22, 2022 at 12:17 AM
+-- Generation Time: Apr 24, 2022 at 02:23 PM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -88,6 +88,36 @@ INSERT INTO `booking` (`booking_id`, `customer_id`, `room_id`, `booking_date`, `
 (15, 16, 3, '2021-11-22 14:09:17', '25-11-2021', '26-11-2021', 0, -100, 0),
 (16, 17, 9, '2021-11-23 18:35:53', '25-11-2021', '24-11-2021', 0, 0, 0),
 (17, 18, 16, '2022-03-10 18:06:04', '14-03-2022', '15-03-2022', 11000, 11000, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `check_in` varchar(100) NOT NULL,
+  `check_out` varchar(100) NOT NULL,
+  `price` int(11) NOT NULL,
+  `is_paid` tinyint(4) NOT NULL,
+  `details` text NOT NULL,
+  `status` varchar(25) DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`id`, `customer_id`, `room_id`, `check_in`, `check_out`, `price`, `is_paid`, `details`, `status`) VALUES
+(1, 1, 1, '2022-04-22', '2022-03-25', 1000, 1, 'approved', 'approved'),
+(2, 2, 1, '2022-04-23', '2022-04-25', 3, 0, 'Simple details', 'pending'),
+(3, 2, 1, '2022-04-23', '2022-04-25', 3, 0, 'Simple details', 'pending'),
+(4, 2, 1, '2022-04-23', '2022-04-25', 3, 0, 'Simple details', 'pending'),
+(5, 2, 1, '2022-04-23', '2022-04-25', 3, 0, 'Simple details..', 'pending'),
+(6, 2, 2, '2022-04-24', '2022-04-25', 2, 0, 'Simple details', 'approved');
 
 -- --------------------------------------------------------
 
@@ -481,17 +511,18 @@ CREATE TABLE `rooms` (
   `building_id` text,
   `details` text,
   `photo` text,
-  `photos` text
+  `photos` text,
+  `price` int(11) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`id`, `name`, `building_id`, `details`, `photo`, `photos`) VALUES
-(1, 'DELUXE KING', '2', 'At Deluxe king you can indulge yourself in a big luxurious bed to relieve your all day’s hustle and bustle. The rooms are well equipped with all the necessary amenities. The spacious bathroom is another great feature of this room.\r\n\r\n', 'uploads/1650584724-deluxe-04.jpeg', '[\"uploads/1650584724-deluxe-04.jpeg\"]'),
-(2, 'DELUXE KING', '2', 'At Deluxe king you can indulge yourself in a big luxurious bed to relieve your all day’s hustle and bustle. The rooms are well equipped with all the necessary amenities. The spacious bathroom is another great feature of this room.\r\n\r\n', 'uploads/1650584725-deluxe-04.jpeg', '[\"uploads/1650584725-deluxe-04.jpeg\"]'),
-(3, 'DELUXE KING', '2', 'At Deluxe king you can indulge yourself in a big luxurious bed to relieve your all day’s hustle and bustle. The rooms are well equipped with all the necessary amenities. The spacious bathroom is another great feature of this room.\r\n\r\n', 'uploads/1650584744-deluxe-04.jpeg', '[\"uploads/1650584744-deluxe-04.jpeg\"]');
+INSERT INTO `rooms` (`id`, `name`, `building_id`, `details`, `photo`, `photos`, `price`) VALUES
+(1, 'DELUXE KING', '2', 'At Deluxe king you can indulge yourself in a big luxurious bed to relieve your all day’s hustle and bustle. The rooms are well equipped with all the necessary amenities. The spacious bathroom is another great feature of this room.\r\n\r\n', 'uploads/1650584724-deluxe-04.jpeg', '[\"uploads/1650584724-deluxe-04.jpeg\"]', 1),
+(2, 'DELUXE KING', '2', 'At Deluxe king you can indulge yourself in a big luxurious bed to relieve your all day’s hustle and bustle. The rooms are well equipped with all the necessary amenities. The spacious bathroom is another great feature of this room.\r\n\r\n', 'uploads/1650584725-deluxe-04.jpeg', '[\"uploads/1650584725-deluxe-04.jpeg\"]', 1),
+(3, 'DELUXE KING', '2', 'At Deluxe king you can indulge yourself in a big luxurious bed to relieve your all day’s hustle and bustle. The rooms are well equipped with all the necessary amenities. The spacious bathroom is another great feature of this room.\r\n\r\n', 'uploads/1650584744-deluxe-04.jpeg', '[\"uploads/1650584744-deluxe-04.jpeg\"]', 1);
 
 -- --------------------------------------------------------
 
@@ -689,16 +720,20 @@ CREATE TABLE `user` (
   `username` varchar(15) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` text,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_type` varchar(25) DEFAULT 'customer',
+  `phone_number` varchar(55) DEFAULT '+8801632257609',
+  `full_name` varchar(255) DEFAULT 'No name',
+  `avatar` varchar(555) NOT NULL DEFAULT 'images/avatar.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `created`) VALUES
-(2, 'Christinea', 'christinea', 'christine@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '2015-11-12 12:49:22'),
-(3, 'Housnata', 'iut cse', 'housnatamoindjie@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '0000-00-00 00:00:00');
+INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `created`, `user_type`, `phone_number`, `full_name`, `avatar`) VALUES
+(2, 'Christinea', 'christinea', 'christine@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '2015-11-12 12:49:22', 'customer', '+8801632257609', 'No name', 'images/avatar.jpg'),
+(3, 'Housnata', 'iut cse', 'housnatamoindjie@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '0000-00-00 00:00:00', 'customer', '+8801632257609', 'No name', 'images/avatar.jpg');
 
 --
 -- Indexes for dumped tables
@@ -717,6 +752,12 @@ ALTER TABLE `booking`
   ADD PRIMARY KEY (`booking_id`),
   ADD KEY `customer_id` (`customer_id`),
   ADD KEY `room_id` (`room_id`);
+
+--
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `buildings`
@@ -860,6 +901,12 @@ ALTER TABLE `addroom`
 --
 ALTER TABLE `booking`
   MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `buildings`
