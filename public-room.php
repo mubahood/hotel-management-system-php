@@ -46,8 +46,8 @@ $rooms = get_table('rooms');
 
             <p class="text-primary mt-5 h1 mb-0 pb-0">AVAILABILITY</p>
             <p class="text-success h1">Available</p>
-
-            <a href="javascript:;" class="btn btn-primary btn-lg d-block rounded-0">BOOK THIS ROOM</a>
+ 
+            <a href="admin-booking-add.php" class="btn btn-primary btn-lg d-block rounded-0">BOOK THIS ROOM</a>
 
         </div>
     </div>
