@@ -23,7 +23,7 @@ include('head.php'); ?>
                                 <div class="container pt-10">
                                     <div class="d-flex justify-content-between py-5">
                                         <div class="">
-                                            <h2 class="text-white fs-1 fw-bolder"><?= $APP_NAME ?></h2>
+                                            <a href="<?= $BASE_URL ?>"><h2 class="text-white fs-1 fw-bolder"><?= $APP_NAME ?></h2></a>
                                         </div>
                                         <div>
                                             <?php if (isset($_SESSION['u'])) {  ?>
