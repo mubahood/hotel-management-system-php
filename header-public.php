@@ -26,8 +26,13 @@ include('head.php'); ?>
                                             <h2 class="text-white fs-1 fw-bolder"><?= $APP_NAME ?></h2>
                                         </div>
                                         <div>
-                                            <a href="login.php" class="text-white fs-1 border ps-5 pe-5">REGISTER</a>
-                                            <a href="login.php" class="text-primary bg-white fs-1 border ps-5 pe-5 ms-5">LOGIN</a>
+                                            <?php if (isset($_SESSION['u'])) {  ?>
+                                                <a href="admin.php" class="text-white fs-1 border fw-bolder ps-5 pe-5">MY DASHBOAD</a>
+                                                <a href="logout.php" class="text-primary bg-white fs-1 border fw-bolder ps-5 pe-5 ms-5">LOGOUT</a>
+                                            <?php } else { ?>
+                                                <a href="register.php" class="text-white fs-1 border fw-bolder ps-5 pe-5">REGISTER</a>
+                                                <a href="login.php" class="text-primary bg-white fs-1 border fw-bolder ps-5 pe-5 ms-5">LOGIN</a>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>

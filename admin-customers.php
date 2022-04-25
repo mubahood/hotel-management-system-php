@@ -9,22 +9,10 @@ if (isset($_SESSION['u'])) {
 }
 $u =  $_SESSION['u'];
 
-if ($user_type != 'customer' ) {
-    $items = db_custom_select(
-        'SELECT * FROM user,rooms,bookings WHERE
-            bookings.customer_id = user.id AND
-            bookings.room_id = rooms.id
-        '
-    );
-} else {
-    $items = db_custom_select(
-        'SELECT * FROM user,rooms,bookings WHERE
-            bookings.customer_id = user.id AND
-            bookings.room_id = rooms.id AND
-            bookings.customer_id = ' . $u['id'] . '
-        '
-    );
-}
+$items = db_custom_select(
+    "SELECT * FROM user WHERE
+    user.user_type = 'customer'"
+);
 
 
 
@@ -57,7 +45,7 @@ include('header.php') ?>
 
 <div class="card mb-5 mb-xl-10">
     <div class="card-header">
-        <h3 class="card-title">Bookings</h3>
+        <h3 class="card-title">Customers</h3>
         <div class="card-toolbar">
             <div class="d-flex align-items-center position-relative my-0 border border-primary rounded me-3">
                 <span class="svg-icon svg-icon-1 position-absolute ms-6">
@@ -80,34 +68,17 @@ include('header.php') ?>
             <thead>
                 <tr class="text-start text-gray-700 fw-bolder fs-7 text-uppercase ">
                     <th>#ID</th>
-                    <th>Room</th>
                     <th>Customer</th>
-                    <th>Check in</th>
-                    <th>Check out</th>
-                    <th>Totol price</th>
-                    <th>Payment</th>
-                    <th>Status</th>
-                    <th>Invoice</th>
-                    <th>Actions</th>
+                    <th>Name</th>
+                    <th>Phone number</th>
+                    <th>Joined</th>
                 </tr>
             </thead>
             <?php
             foreach ($items as $key => $v) { ?>
                 <tr class="fw-bold p-0 m-0 border-bottom-2 border-gray-200">
                     <th><?= $v['id'] ?></th>
-                    <td class="p-1">
-                        <span class="d-flex align-items-center ">
-                            <div class="d-flex align-items-center ">
-                                <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo" src="assets/media/avatars/300-1.jpg" />
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <div class="fw-bolder d-flex align-items-center fs-5"><?= $v['name'] ?></div>
-                                    <a href="#" class="fw-bold text-muted text-hover-primary fs-7">Building #<?= $v['building_id'] ?></a>
-                                </div>
-                            </div>
-                        </span>
-                    </td>
+
                     <td class="p-1">
                         <div class="d-flex align-items-center ">
                             <div class="symbol symbol-50px symbol-circle me-5">
@@ -119,30 +90,10 @@ include('header.php') ?>
                             </div>
                         </div>
                     </td>
-                    <td class="pt-5"><?= $v['check_in'] ?></td>
-                    <td class="pt-5"><?= $v['check_out'] ?></td>
-                    <td class="pt-5"><?= $v['price'] . " " . $CURRENCY ?> </td>
-                    <td class="pt-5"><?php
-                                        if ($v['is_paid'] == 0) {
-                                            echo '<span class="badge badge-danger">Not paid</span>';
-                                        } else {
-                                            echo '<span class="badge badge-success">Paid</span>';
-                                        }
-                                        ?></td>
-                    <td class="pt-5"><?php
-                                        if ($v['status'] == 'pending') {
-                                            echo '<span class="badge badge-warning">Pending</span>';
-                                        } else if ($v['status'] == 'approved') {
-                                            echo '<span class="badge badge-success">Approved</span>';
-                                        } else {
-                                            echo '<span class="badge badge-danger">Canceled</span>';
-                                        }
-                                        ?></td>
-                    <td class="pt-5"><a href="javascript:;" class="btn btn-sm btn-light-info">Print invoice</a></td>
-                    <td>
-                        <a class="text-primary" href="admin-booking-add.php?edit=<?= $v['id'] ?>">Edit</a>
-                        <a class="text-danger" href="admin-booking-add.php?edit=">Delete</a>
-                    </td>
+                    <td class="pt-5"><?= $v['name'] ?></td>
+                    <td class="pt-5"><?= $v['phone_number'] ?></td>
+                    <td class="pt-5"><?= $v['created'] ?></td>
+
                 </tr>
             <?php }
             ?>

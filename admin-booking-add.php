@@ -1,19 +1,28 @@
 <?php
 require_once('functions.php');
 
+$user_type = "";
+if (isset($_SESSION['u'])) {
+    if (isset($_SESSION['u']['user_type'])) {
+        $user_type = $_SESSION['u']['user_type'];
+    }
+}
+$u =  $_SESSION['u'];
+
+
 $edit_id = 0;
 $is_edit = false;
-if(isset($_GET['edit'])){
+if (isset($_GET['edit'])) {
     $id = ((int)($_GET['edit']));
-    if($id>0){
+    if ($id > 0) {
         $items = db_custom_select(
             'SELECT * FROM user,rooms,bookings WHERE
                 bookings.customer_id = user.id AND
-                bookings.id = '.$id.' AND
+                bookings.id = ' . $id . ' AND
                 bookings.room_id = rooms.id
             '
         );
-        if(isset($items[0])){
+        if (isset($items[0])) {
             $item = $items[0];
             $is_edit = true;
             $edit_id = $id;
@@ -23,12 +32,32 @@ if(isset($_GET['edit'])){
 }
 
 
-
-$customers = get_users('customer');
+$customers = [];
+$_customers = get_users('customer');
+if ($user_type != 'admin2') {
+    foreach ($_customers as $key => $value) {
+        if ($key . "" == $u['id'] . "") {
+            $customers[$key] = $value;
+        }
+    }
+} else {
+    $customers = $_customers;
+}
 $rooms = get_rooms('available');
 
 
 if (isset($_POST['check_in'])) {
+
+    if (isset($_POST['edit'])) {
+        $id = $_POST['edit'];
+        $status = $_POST['status'];
+        $is_paid = ((int)($_POST['is_paid']));
+        $sql = "UPDATE bookings SET status = '$status', is_paid = $is_paid WHERE id = $id ";
+        $conn->query($sql);
+        set_alert('Booking status updated successfully!', 'success');
+        header('Location: admin-bookings.php');
+        die();
+    }
 
 
     $_SESSION['form_values'] = $_POST;
@@ -38,9 +67,15 @@ if (isset($_POST['check_in'])) {
     $d['check_out'] = $_POST['check_out'];
     $d['is_paid'] = $_POST['is_paid'];
     $d['details'] = $_POST['details'];
-    $d['status'] = $_POST['status'];
+
+    if ($user_type == 'admin2') {
+        $d['status'] = $_POST['status'];
+    } else {
+        $d['status'] = 'pending';
+    }
+
     $d['price'] = 1;
- 
+
     date_default_timezone_set('UTC');
 
 
@@ -94,7 +129,11 @@ include('header.php') ?>
 
 <div class="card mb-5 mb-xl-10">
     <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
-        <h3 class="card-title">Booking - <?php if($is_edit){echo  "Update";} else  {echo 'Create';} ?></h3>
+        <h3 class="card-title">Booking - <?php if ($is_edit) {
+                                                echo  "Update";
+                                            } else {
+                                                echo 'Create';
+                                            } ?></h3>
         <div class="card-toolbar">
             <a href="admin-bookings.php" class="btn btn-sm btn-dark">
                 All bookings
@@ -103,7 +142,11 @@ include('header.php') ?>
     </div>
     <div id="kt_account_settings_profile_details" class="collapse show">
         <form action="admin-booking-add.php" method="post" enctype="multipart/form-data" class="form">
+            <?php if ($is_edit) { ?>
+                <input type="hidden" name="edit" value="<?= $edit_id ?>">
+            <?php } ?>
             <div class="card-body border-top p-9">
+
 
                 <div class="row">
 
@@ -132,17 +175,15 @@ include('header.php') ?>
 
                 <div class="row">
                     <div class="col-md-6 mb-4">
-                        <div class="form-group">
-                            <?= input_text([
-                                'label' => 'Check in date',
-                                'name' => 'check_in',
-                                'hint' => 'Start date',
-                                'required' => 'required',
-                                'value' => '',
-                                'type' => 'date',
-                                'attributes' => '',
-                            ]) ?>
-                        </div>
+                        <?= input_text([
+                            'label' => 'Check in date',
+                            'name' => 'check_in',
+                            'hint' => 'Start date',
+                            'required' => 'required',
+                            'value' => '',
+                            'type' => 'date',
+                            'attributes' => '',
+                        ]) ?>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="form-group">
@@ -175,19 +216,34 @@ include('header.php') ?>
                         ]) ?>
                     </div>
 
+
                     <div class="col-md-6 mb-4">
-                        <?= input_select([
-                            'label' => 'Booking status',
-                            'name' => 'status',
-                            'required' => 'required',
-                            'value' => '',
-                            'options' => [
-                                'pending' => 'Pending',
-                                'approved' => 'Approved',
-                                'canceled' => 'Canceled',
-                            ],
-                        ]) ?>
+                        <?php if ($user_type == 'admin2') { ?>
+                            <?= input_select([
+                                'label' => 'Booking status',
+                                'name' => 'status',
+                                'required' => 'required',
+                                'value' => '',
+                                'options' => [
+                                    'pending' => 'Pending',
+                                    'approved' => 'Approved',
+                                    'canceled' => 'Canceled',
+                                ],
+                            ]) ?>
+
+                        <?php } else { ?>
+                            <div class="alert alert-primary border border-primary">
+                                <h3>How to pay</h3>
+                                <p class="p-0 m-0">To make your payment for this booking online,
+                                    please follow these steps.</p>
+                                <p class="p-0 m-0">1. Copy this room ID</p>
+                                <p class="p-0 m-0">2. Click on pay now button below</p>
+                                <p class="p-0 m-0">3. Make a payment. DONE!</p>
+                                <a target="_blank" href="<?= $PAYMENT_LINK ?>" class="btn btn-light-primary border d-block mt-2 border-primary">PAY NOW</a>
+                            </div>
+                        <?php } ?>
                     </div>
+
                 </div>
 
 

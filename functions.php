@@ -3,6 +3,7 @@ $conn = mysqli_connect("localhost", "root", "root", "hotelms");
 $APP_NAME = 'Husna Hotels';
 $BASE_URL = '/f3';
 $CURRENCY = 'BDT';
+$PAYMENT_LINK = 'https://ravesandbox.flutterwave.com/pay/li5cozm8erye';
 
 
 my_session_start();
@@ -222,7 +223,7 @@ function input_select($params)
     echo <<<EOD
         <div class="form-group">
             <label class="{$params['required']} fs-4 fw-bold mb-0" for="{$params['name']}">{$params['label']}</label>
-            <select data-control="select2" data-placeholder="Select an option" {$params['required']} class=" form-select form-select-solid"  name="{$params['name']}" required id="{$params['name']}">
+            <select data-control="select2" data-placeholder="Select an option" {$params['required']} class=" form-select form-select-solid border-primary"  name="{$params['name']}" required id="{$params['name']}">
                 {$options}
             </select>
             {$params['hint']}
@@ -259,9 +260,9 @@ function input_text($params)
 
 
     echo <<<EOD
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label class="{$params['required']}  fs-4 fw-bold mb-0" for="{$params['name']}">{$params['label']}</label>
-                <input value="{$params['value']}" class="form-control form-control-md form-control-solid" type="{$params['type']}" name="{$params['name']}" {$params['attributes']} {$params['required']} id="{$params['name']}">
+                <input value="{$params['value']}" class="form-control form-control-md border-primary form-control-solid " type="{$params['type']}" name="{$params['name']}" {$params['attributes']} {$params['required']} id="{$params['name']}">
                 {$params['hint']}
                 {$params['error']}
             </div>

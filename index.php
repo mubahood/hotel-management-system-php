@@ -40,11 +40,10 @@ $rooms = get_table('rooms');
 
 
     <h1 class="text-dark py-10" style="font-size: 2rem;">Browse by rooms</h1>
-
     <div class="row">
         <?php
         foreach ($rooms as $k => $b) { ?>
-            <a href="public-room.php?id=<?= $b['id'] ?>" class="col-6 col-md-2 ">
+            <a href="public-room.php?id=<?= $b['id'] ?>" class="col-6 col-md-3 ">
                 <div class="card card-px-0 shadow-sm rounded-0">
                     <img alt="Logo" class="img-fluid card-img-top rounded-0" src="<?= $b['photo'] ?>" />
                     <div class="card-body bg-primary text-white p-0 px-5">
