@@ -69,6 +69,13 @@ include('head.php'); ?>
 										<span class="menu-title fs-3 ">Bookings</span>
 									</a>
 								</div>
+
+								<div class="menu-item">
+									<a class="menu-link" href="logout.php">
+										<span class="menu-title fs-3 ">Logout</span>
+									</a>
+								</div>
+								
 							<?php } ?>
 
 							<?php if ($user_type == 'admin') { ?>
