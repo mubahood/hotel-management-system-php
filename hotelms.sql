@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 24, 2022 at 02:23 PM
+-- Generation Time: Apr 25, 2022 at 12:55 AM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -117,7 +117,9 @@ INSERT INTO `bookings` (`id`, `customer_id`, `room_id`, `check_in`, `check_out`,
 (3, 2, 1, '2022-04-23', '2022-04-25', 3, 0, 'Simple details', 'pending'),
 (4, 2, 1, '2022-04-23', '2022-04-25', 3, 0, 'Simple details', 'pending'),
 (5, 2, 1, '2022-04-23', '2022-04-25', 3, 0, 'Simple details..', 'pending'),
-(6, 2, 2, '2022-04-24', '2022-04-25', 2, 0, 'Simple details', 'approved');
+(6, 2, 2, '2022-04-24', '2022-04-25', 2, 0, 'Simple details', 'approved'),
+(7, 3, 4, '2022-04-23', '2022-04-30', 8000, 1, 'some comment', 'approved'),
+(8, 7, 1, '2022-04-25', '2022-04-30', 6, 1, 'SInple ddetails...', 'approved');
 
 -- --------------------------------------------------------
 
@@ -138,8 +140,8 @@ CREATE TABLE `buildings` (
 --
 
 INSERT INTO `buildings` (`id`, `name`, `photo`, `supervisor`, `details`) VALUES
-(2, 'Serina building', 'uploads/1650583367-hotel-sarina-bar.jpeg', 'Johjn Black', 'WELCOME TO HOTEL SARINA\r\nWelcome to Hotel Sarina, Dhaka’s most conveniently located Five Star Hotel. ‘Banani’, one of the posh areas of Dhaka, also the new business hub, are the neighborhood of Hotel Sarina.\r\n\r\nBeing located in this business district you are not far from any of the important destination of your choice like business district of Gulshan, Baridhara Diplomatic Zone, Airport and so on. It is only thirty minutes drive from the International Airport, about five to ten minutes drive to Gulshan and to the diplomatic zone. Two renowned shopping malls are only a few minutes walking distance from the hotel.'),
-(3, 'DELUXE KING', 'uploads/1650584591-hotel-sarina-bar.jpeg', '', 'At Deluxe king you can indulge yourself in a big luxurious bed to relieve your all day’s hustle and bustle. The rooms are well equipped with all the necessary amenities. The spacious bathroom is another great feature of this room.\r\n\r\n');
+(1, 'Le Méridien', 'uploads/1650846615-building_1.jpg', 'Camara Halid', 'Le Méridien Olea is the Oasis of Le Meridien, Dhaka. Decorated with Cabanas, the interior has utmost sophistication to give you the essence of a gratifying Arabian luxury. Olea is the Oasis of Le Meridien, Dhaka. Decorated with Cabanas, the interior has utmost sophistication to give you the essence of a gratifying Arabian luxury.\r\nOlea is the Oasis of Le Meridien, Dhaka. Decorated with Cabanas, the interior has utmost sophistication to give you the essence of a gratifying Arabian luxury.\r\n\r\n'),
+(2, 'Hotel Sarina', 'uploads/1650846863-building_2.jpg', 'Housnata', 'This upscale, contemporary hotel is 2 km from Hazrat Shahjalal International Airport and 11 km from Jatiyo Sangsad Bhaban, the Bangladesh Parliament complex.\r\nThis upscale, contemporary hotel is 2 km from Hazrat Shahjalal International Airport and 11 km from Jatiyo Sangsad Bhaban, the Bangladesh Parliament complex.\r\nCheck-in time: 15:00\r\nCheck-out time: 12:00');
 
 -- --------------------------------------------------------
 
@@ -520,9 +522,10 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `name`, `building_id`, `details`, `photo`, `photos`, `price`) VALUES
-(1, 'DELUXE KING', '2', 'At Deluxe king you can indulge yourself in a big luxurious bed to relieve your all day’s hustle and bustle. The rooms are well equipped with all the necessary amenities. The spacious bathroom is another great feature of this room.\r\n\r\n', 'uploads/1650584724-deluxe-04.jpeg', '[\"uploads/1650584724-deluxe-04.jpeg\"]', 1),
-(2, 'DELUXE KING', '2', 'At Deluxe king you can indulge yourself in a big luxurious bed to relieve your all day’s hustle and bustle. The rooms are well equipped with all the necessary amenities. The spacious bathroom is another great feature of this room.\r\n\r\n', 'uploads/1650584725-deluxe-04.jpeg', '[\"uploads/1650584725-deluxe-04.jpeg\"]', 1),
-(3, 'DELUXE KING', '2', 'At Deluxe king you can indulge yourself in a big luxurious bed to relieve your all day’s hustle and bustle. The rooms are well equipped with all the necessary amenities. The spacious bathroom is another great feature of this room.\r\n\r\n', 'uploads/1650584744-deluxe-04.jpeg', '[\"uploads/1650584744-deluxe-04.jpeg\"]', 1);
+(1, 'Coventina Suites', '1', 'Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2. Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2. Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2.\r\nAffluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2. Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2. Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2.\r\nAffluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2. Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2. Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2.\r\n', 'uploads/1650847785-1.png', '[\"uploads/1650847785-1.png\"]', 32000),
+(2, 'SPACE APARTMENTS', '2', 'Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2. Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2.Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2. Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2.Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2. Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2.Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2. Affluent area known for international restaurants, embassies & jewelry stores near Gulshan Circle 2.', 'uploads/1650847832-7.png', '[\"uploads/1650847832-7.png\"]', 800),
+(3, 'Babylon Garden', '2', 'Good location overall for sightseeing, recreation, dining and getting around Good location overall for sightseeing, recreation, dining and getting around\r\nGood location overall for sightseeing, recreation, dining and getting around\r\nGood location overall for sightseeing, recreation, dining and getting aroundGood location overall for sightseeing, recreation, dining and getting around Good location overall for sightseeing, recreation, dining and getting around\r\nGood location overall for sightseeing, recreation, dining and getting around\r\nGood location overall for sightseeing, recreation, dining and getting around', 'uploads/1650847876-6.png', '[\"uploads/1650847876-6.png\"]', 1300),
+(4, 'Elegant stay in Bashundhara', '1', 'Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara Elegant stay in Bashundhara ', 'uploads/1650847922-5.png', '[\"uploads/1650847922-5.png\"]', 7900);
 
 -- --------------------------------------------------------
 
@@ -717,23 +720,27 @@ INSERT INTO `staff_type` (`staff_type_id`, `staff_type`) VALUES
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `username` varchar(15) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` text,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_type` varchar(25) DEFAULT 'customer',
   `phone_number` varchar(55) DEFAULT '+8801632257609',
   `full_name` varchar(255) DEFAULT 'No name',
-  `avatar` varchar(555) NOT NULL DEFAULT 'images/avatar.jpg'
+  `avatar` varchar(555) NOT NULL DEFAULT 'images/avatar.jpg',
+  `username` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `created`, `user_type`, `phone_number`, `full_name`, `avatar`) VALUES
-(2, 'Christinea', 'christinea', 'christine@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '2015-11-12 12:49:22', 'customer', '+8801632257609', 'No name', 'images/avatar.jpg'),
-(3, 'Housnata', 'iut cse', 'housnatamoindjie@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '0000-00-00 00:00:00', 'customer', '+8801632257609', 'No name', 'images/avatar.jpg');
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created`, `user_type`, `phone_number`, `full_name`, `avatar`, `username`) VALUES
+(2, 'Christinea', 'christine@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '2015-11-12 12:49:22', 'customer', '+8801632257609', 'No name', 'images/avatar.jpg', NULL),
+(3, 'Housnata', 'housnatamoindjie@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '0000-00-00 00:00:00', 'customer', '+8801632257609', 'No name', 'images/avatar.jpg', NULL),
+(4, 'Kule Hussein', 'admin@gmail.com', '$2y$10$MiWn3o/SKKbsZ.P10868CO9/9zy5zHyfmswl01VscoR1xMnOhh2Fi', '2022-04-23 21:00:00', 'admin', '+256706638494', 'Muhindo Mubaraka', 'images/avatar.jpg', 'admin@gmail.com'),
+(5, 'Muhindo Mubaraka', 'desk@gmail.com', '$2y$10$MiWn3o/SKKbsZ.P10868CO9/9zy5zHyfmswl01VscoR1xMnOhh2Fi', '2022-04-23 21:00:00', 'admin2', '+256706638494', 'Muhindo Mubaraka', 'images/avatar.jpg', 'customer@gmail.com'),
+(6, 'Muhindo Mubaraka', 'customer1@gmail.com', '$2y$10$GeunlDfYivtSnXxZVLqAX.xNhRyaUjarDYPM5xGOPQu7/YC3USMVC', '2022-04-23 21:00:00', 'customer', '+256706638494', 'Muhindo Mubaraka', 'images/avatar.jpg', 'customer1@gmail.com'),
+(7, 'John black', 'customer2@gmail.com', '$2y$10$o6pAhJ31VaDYzuTuHuBZiOeaFiJiWBRoSfaNrtXjYMyQVikkMEApa', '2022-04-23 21:00:00', 'customer', '+256706638494', 'John black', 'images/avatar.jpg', 'customer2@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -906,13 +913,13 @@ ALTER TABLE `booking`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `buildings`
 --
 ALTER TABLE `buildings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `car_image`
@@ -984,7 +991,7 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `room_type`
@@ -1026,7 +1033,7 @@ ALTER TABLE `staff_type`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
