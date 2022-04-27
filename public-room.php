@@ -45,9 +45,20 @@ $rooms = get_table('rooms');
             <p class="text-dark h1"><?= $R['price'] . " " . $CURRENCY ?></p>
 
             <p class="text-primary mt-5 h1 mb-0 pb-0">AVAILABILITY</p>
-            <p class="text-success h1">Available</p>
- 
-            <a href="admin-booking-add.php" class="btn btn-primary btn-lg d-block rounded-0">BOOK THIS ROOM</a>
+
+            <?php if (is_room_available($R['id'])) { ?>
+                <span class="badge badge-success p-5 rounded-0 d-block fs-3">Available</span>
+
+                <a href="admin-booking-add.php?check_in=<?= $R['id'] ?>" class="btn btn-primary btn-lg d-block rounded-0">BOOK THIS ROOM</a>
+
+            <?php } else { ?>
+                <br>
+                <span class="badge badge-danger">IN USE</span>
+            <?php } ?>
+
+
+
+
 
         </div>
     </div>

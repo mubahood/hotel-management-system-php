@@ -8,6 +8,8 @@ $PAYMENT_LINK = 'https://ravesandbox.flutterwave.com/pay/li5cozm8erye';
 
 my_session_start();
 
+
+
 function get_rooms($status)
 {
     $available = false;
@@ -97,6 +99,14 @@ function my_session_start()
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
+
+    if (isset($_GET['check_in'])) {
+        $check_in = (int)($_GET);
+        if ($check_in > 0) {
+            $_SESSION['form_values']['room_id'] = $check_in;
+        }
+    }
+
 }
 
 function set_alert($msg, $type)

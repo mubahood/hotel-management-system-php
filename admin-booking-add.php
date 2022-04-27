@@ -1,6 +1,13 @@
 <?php
 require_once('functions.php');
 
+if(isset($_GET['check_in'])){
+    $check_in = (int)($_GET);
+    if($check_in>0){
+        $_SESSION['form_values']['room_id'] = $check_in;
+    }
+}
+
 $user_type = "";
 if (isset($_SESSION['u'])) {
     if (isset($_SESSION['u']['user_type'])) {
@@ -49,7 +56,7 @@ $rooms = get_rooms('available');
 if (isset($_POST['check_in'])) {
 
     if (isset($_POST['edit'])) {
-        $id = $_POST['edit'];
+        $id = $_POST['editon'];
         $status = $_POST['status'];
         $is_paid = ((int)($_POST['is_paid']));
         $sql = "UPDATE bookings SET status = '$status', is_paid = $is_paid WHERE id = $id ";
@@ -118,8 +125,9 @@ if (isset($_POST['check_in'])) {
         header('Location: admin-bookings.php');
         die();
     } else {
+        dd($conn);
         set_alert('Failed to created Building. Try again.', 'danger');
-        header('Location: admin-bookings-add.php');
+        header('Location: admin-booking-add.php');
         die();
     }
 }
