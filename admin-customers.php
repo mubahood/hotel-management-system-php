@@ -1,5 +1,21 @@
 <?php
 require_once('functions.php');
+if (isset($_GET['delete'])) {
+    $id = (int) trim($_GET['delete']);
+    $sql = "DELETE FROM user WHERE id = $id";
+    $conn->query($sql);
+    $sql = "DELETE FROM bookings WHERE id = $id";
+    $conn->query($sql);
+    set_alert('Customer deleted successfully!', 'success');
+    header('Location: admin-customers.php');
+    die();
+}
+
+
+
+if (isset($_SESSION['form_values'])) {
+    unset($_SESSION['form_values']);
+}
 
 $user_type = "";
 if (isset($_SESSION['u'])) {
@@ -14,32 +30,6 @@ $items = db_custom_select(
     user.user_type = 'customer'"
 );
 
-
-
-/*
-
-          [id] => 1
-            [] => DELUXE KING
-            [username] => christinea
-            [email] => christine@gmail.com
-            [password] => $2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6
-            [created] => 2015-11-12 15:49:22
-            [user_type] => customer
-            [phone_number] => +8801632257609
-            [customer_id] => 2
-            [room_id] => 1
-            [check_in] => 2022-04-23
-            [check_out] => 2022-04-25
-            [price] => 1
-            [is_paid] => 0
-            [details] => At Deluxe king you can indulge yourself in a big luxurious bed to relieve your all day’s hustle and bustle. The rooms are well equipped with all the necessary amenities. The spacious bathroom is another great feature of this room.
-
-
-            [status] => pending
-            [building_id] => 2
-            [photo] => uploads/1650584724-deluxe-04.jpeg
-            [photos] => ["uploads/1650584724-deluxe-04.jpeg"]
-*/
 
 include('header.php') ?>
 
@@ -57,8 +47,8 @@ include('header.php') ?>
                 <input type="text" id="s" data-kt-customer-table-filter="search" class="form-control form-control-sm form-control-solid w-250px ps-15" placeholder="Search..." />
             </div>
 
-            <a href="admin-booking-add.php" type="button" class="btn btn-sm btn-primary">
-                Create new booking
+            <a href="admin-customers-create.php" type="button" class="btn btn-sm btn-primary">
+                Create new customer
             </a>
         </div>
     </div>
@@ -72,6 +62,7 @@ include('header.php') ?>
                     <th>Name</th>
                     <th>Phone number</th>
                     <th>Joined</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <?php
@@ -93,6 +84,10 @@ include('header.php') ?>
                     <td class="pt-5"><?= $v['name'] ?></td>
                     <td class="pt-5"><?= $v['phone_number'] ?></td>
                     <td class="pt-5"><?= $v['created'] ?></td>
+                    <td class="pt-5">
+                        <a class="text-info" href="admin-customers-create.php?edit=<?= $v['id'] ?>">Edit</a>
+                        <a class="text-danger" href="admin-customers.php?delete=<?= $v['id'] ?>">Delete</a>
+                    </td>
 
                 </tr>
             <?php }

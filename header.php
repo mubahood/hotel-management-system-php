@@ -71,6 +71,18 @@ include('head.php'); ?>
 								</div>
 
 								<div class="menu-item">
+									<a class="menu-link" href="admin-customers.php">
+										<span class="menu-title fs-3 ">Customers</span>
+									</a>
+								</div>
+
+								<div class="menu-item">
+									<a class="menu-link" href="admin-rooms.php">
+										<span class="menu-title fs-3 ">Rooms</span>
+									</a>
+								</div>
+
+								<div class="menu-item">
 									<a class="menu-link" href="logout.php">
 										<span class="menu-title fs-3 ">Logout</span>
 									</a>
