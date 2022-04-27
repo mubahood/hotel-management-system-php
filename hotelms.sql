@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 25, 2022 at 12:55 AM
+-- Generation Time: Apr 27, 2022 at 08:52 PM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -51,47 +51,6 @@ INSERT INTO `addroom` (`id`, `romm_type`, `image`, `price`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `booking`
---
-
-CREATE TABLE `booking` (
-  `booking_id` int(10) NOT NULL,
-  `customer_id` int(10) NOT NULL,
-  `room_id` int(10) NOT NULL,
-  `booking_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `check_in` varchar(100) DEFAULT NULL,
-  `check_out` varchar(100) NOT NULL,
-  `total_price` int(10) NOT NULL,
-  `remaining_price` int(10) NOT NULL,
-  `payment_status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `booking`
---
-
-INSERT INTO `booking` (`booking_id`, `customer_id`, `room_id`, `booking_date`, `check_in`, `check_out`, `total_price`, `remaining_price`, `payment_status`) VALUES
-(1, 1, 5, '2017-11-13 05:45:17', '13-11-2017', '15-11-2017', 3000, 2700, 0),
-(2, 2, 2, '2017-11-13 05:46:04', '13-11-2017', '16-11-2017', 6000, 0, 1),
-(3, 3, 2, '2017-11-11 06:49:19', '11-11-2017', '14-11-2017', 6000, 0, 1),
-(4, 4, 7, '2017-11-09 06:50:24', '11-11-2017', '15-11-2017', 10000, 10000, 0),
-(5, 5, 13, '2017-11-17 06:59:10', '17-11-2017', '20-11-2017', 12000, 0, 1),
-(6, 6, 9, '2021-04-08 09:45:56', '08-04-2021', '10-04-2021', 3000, 0, 1),
-(7, 7, 14, '2021-04-08 17:56:41', '08-04-2021', '10-04-2021', 16500, 11500, 0),
-(8, 8, 22, '2021-04-09 08:32:57', '09-04-2021', '13-04-2021', 34500, 0, 1),
-(9, 9, 4, '2021-11-07 09:51:31', '21-11-2021', '24-11-2021', 12000, 0, 1),
-(10, 11, 25, '2021-11-07 09:54:46', '28-11-2021', '30-11-2021', 24000, 24000, 0),
-(11, 12, 2, '2021-11-15 16:21:50', '17-11-2021', '20-11-2021', 6000, 0, 1),
-(12, 13, 10, '2021-11-15 16:25:22', '17-11-2021', '22-11-2021', 9000, 0, 1),
-(13, 14, 24, '2021-11-15 17:16:13', '16-11-2021', '19-11-2021', 14400, 14400, 0),
-(14, 15, 15, '2021-11-22 13:59:51', '25-11-2021', '29-11-2021', 27500, 27500, 0),
-(15, 16, 3, '2021-11-22 14:09:17', '25-11-2021', '26-11-2021', 0, -100, 0),
-(16, 17, 9, '2021-11-23 18:35:53', '25-11-2021', '24-11-2021', 0, 0, 0),
-(17, 18, 16, '2022-03-10 18:06:04', '14-03-2022', '15-03-2022', 11000, 11000, 0);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `bookings`
 --
 
@@ -112,14 +71,7 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`id`, `customer_id`, `room_id`, `check_in`, `check_out`, `price`, `is_paid`, `details`, `status`) VALUES
-(1, 1, 1, '2022-04-22', '2022-03-25', 1000, 1, 'approved', 'approved'),
-(2, 2, 1, '2022-04-23', '2022-04-25', 3, 0, 'Simple details', 'pending'),
-(3, 2, 1, '2022-04-23', '2022-04-25', 3, 0, 'Simple details', 'pending'),
-(4, 2, 1, '2022-04-23', '2022-04-25', 3, 0, 'Simple details', 'pending'),
-(5, 2, 1, '2022-04-23', '2022-04-25', 3, 0, 'Simple details..', 'pending'),
-(6, 2, 2, '2022-04-24', '2022-04-25', 2, 0, 'Simple details', 'approved'),
-(7, 3, 4, '2022-04-23', '2022-04-30', 8000, 1, 'some comment', 'approved'),
-(8, 7, 1, '2022-04-25', '2022-04-30', 6, 1, 'SInple ddetails...', 'approved');
+(1, 3, 1, '2022-04-26', '2022-04-26', 160000, 1, '', 'approved');
 
 -- --------------------------------------------------------
 
@@ -727,20 +679,22 @@ CREATE TABLE `user` (
   `phone_number` varchar(55) DEFAULT '+8801632257609',
   `full_name` varchar(255) DEFAULT 'No name',
   `avatar` varchar(555) NOT NULL DEFAULT 'images/avatar.jpg',
-  `username` text
+  `username` text,
+  `details` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `email`, `password`, `created`, `user_type`, `phone_number`, `full_name`, `avatar`, `username`) VALUES
-(2, 'Christinea', 'christine@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '2015-11-12 12:49:22', 'customer', '+8801632257609', 'No name', 'images/avatar.jpg', NULL),
-(3, 'Housnata', 'housnatamoindjie@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '0000-00-00 00:00:00', 'customer', '+8801632257609', 'No name', 'images/avatar.jpg', NULL),
-(4, 'Kule Hussein', 'admin@gmail.com', '$2y$10$MiWn3o/SKKbsZ.P10868CO9/9zy5zHyfmswl01VscoR1xMnOhh2Fi', '2022-04-23 21:00:00', 'admin', '+256706638494', 'Muhindo Mubaraka', 'images/avatar.jpg', 'admin@gmail.com'),
-(5, 'Muhindo Mubaraka', 'desk@gmail.com', '$2y$10$MiWn3o/SKKbsZ.P10868CO9/9zy5zHyfmswl01VscoR1xMnOhh2Fi', '2022-04-23 21:00:00', 'admin2', '+256706638494', 'Muhindo Mubaraka', 'images/avatar.jpg', 'customer@gmail.com'),
-(6, 'Muhindo Mubaraka', 'customer1@gmail.com', '$2y$10$GeunlDfYivtSnXxZVLqAX.xNhRyaUjarDYPM5xGOPQu7/YC3USMVC', '2022-04-23 21:00:00', 'customer', '+256706638494', 'Muhindo Mubaraka', 'images/avatar.jpg', 'customer1@gmail.com'),
-(7, 'John black', 'customer2@gmail.com', '$2y$10$o6pAhJ31VaDYzuTuHuBZiOeaFiJiWBRoSfaNrtXjYMyQVikkMEApa', '2022-04-23 21:00:00', 'customer', '+256706638494', 'John black', 'images/avatar.jpg', 'customer2@gmail.com');
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created`, `user_type`, `phone_number`, `full_name`, `avatar`, `username`, `details`) VALUES
+(2, 'Christinea', 'christine@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '2015-11-12 12:49:22', 'customer', '+8801632257609', 'No name', 'images/avatar.jpg', NULL, NULL),
+(3, 'Housnata', 'housnatamoindjie@gmail.com', '$2y$10$Vjyzj5QNReEPs4FB2.AKduxvfK.743uvI0PuGKGdIqcxA7rL80Be6', '0000-00-00 00:00:00', 'customer', '+8801632257609', 'No name', 'images/avatar.jpg', NULL, NULL),
+(4, 'Kule Hussein', 'admin@gmail.com', '$2y$10$MiWn3o/SKKbsZ.P10868CO9/9zy5zHyfmswl01VscoR1xMnOhh2Fi', '2022-04-23 21:00:00', 'admin', '+256706638494', 'Muhindo Mubaraka', 'images/avatar.jpg', 'admin@gmail.com', NULL),
+(5, 'Muhindo Mubaraka', 'desk@gmail.com', '$2y$10$MiWn3o/SKKbsZ.P10868CO9/9zy5zHyfmswl01VscoR1xMnOhh2Fi', '2022-04-23 21:00:00', 'admin2', '+256706638494', 'Muhindo Mubaraka', 'images/avatar.jpg', 'customer@gmail.com', NULL),
+(6, 'Muhindo Mubaraka', 'customer1@gmail.com', '$2y$10$GeunlDfYivtSnXxZVLqAX.xNhRyaUjarDYPM5xGOPQu7/YC3USMVC', '2022-04-23 21:00:00', 'customer', '+256706638494', 'Muhindo Mubaraka', 'images/avatar.jpg', 'customer1@gmail.com', NULL),
+(7, 'John black', 'customer2@gmail.com', '$2y$10$o6pAhJ31VaDYzuTuHuBZiOeaFiJiWBRoSfaNrtXjYMyQVikkMEApa', '2022-04-23 21:00:00', 'customer', '+256706638494', 'John black', 'images/avatar.jpg', 'customer2@gmail.com', NULL),
+(11, 'Muhindo Mubaraka', 'customer4@gmail.com', '$2y$10$SX6cEbX7fgiR/wDZp6UmLue/bQNvZeNGPS6l9lMX8PFVs1JrgWBUu', '2022-04-26 21:00:00', 'customer', '+256706638494', 'Muhindo Mubaraka', 'images/avatar.jpg', 'customer4@gmail.com', 'customer4@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -751,14 +705,6 @@ INSERT INTO `user` (`id`, `name`, `email`, `password`, `created`, `user_type`, `
 --
 ALTER TABLE `addroom`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `booking`
---
-ALTER TABLE `booking`
-  ADD PRIMARY KEY (`booking_id`),
-  ADD KEY `customer_id` (`customer_id`),
-  ADD KEY `room_id` (`room_id`);
 
 --
 -- Indexes for table `bookings`
@@ -904,16 +850,10 @@ ALTER TABLE `addroom`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `booking`
---
-ALTER TABLE `booking`
-  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `buildings`
@@ -1033,18 +973,11 @@ ALTER TABLE `staff_type`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `booking`
---
-ALTER TABLE `booking`
-  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`);
 
 --
 -- Constraints for table `customer`
